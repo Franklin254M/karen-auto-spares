@@ -40,7 +40,7 @@ as $$ select exists (select 1 from public.profiles where id = auth.uid() and rol
 
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer set search_path = public
-as $$ begin insert into public.profiles (id, full_name, role) values (new.id, coalesce(new.raw_user_meta_data->>'full_name', 'Team member'), coalesce((new.raw_user_meta_data->>'role')::public.user_role, 'sales_agent')); return new; end; $$;
+as $$ begin insert into public.profiles (id, full_name, role) values (new.id, coalesce(new.raw_user_meta_data->>'full_name', 'Team member'), 'sales_agent'); return new; end; $$;
 create trigger on_auth_user_created after insert on auth.users for each row execute procedure public.handle_new_user();
 
 alter table public.profiles enable row level security;
