@@ -21,11 +21,6 @@ python -m http.server 4173
 
 Then visit `http://localhost:4173`.
 
-## Demo accounts
-
-- Administrator: `admin@ledgerly.test` / `admin123`
-- Sales agent: `agent@ledgerly.test` / `agent123`
-
-Data is stored in the browser's `localStorage`, so this version is a functional front-end prototype. To share one live dataset across laptops, connect the data functions in `app.js` to a hosted database and replace the demo login with server-side authentication before deploying to a host such as Vercel, Netlify, or Render.
+The offline version asks for a local name, email, and role when entering the workspace. It does not provide secure authentication; data is stored in the browser's `localStorage`. Use the online Supabase version for secure accounts and shared access across laptops.
 
 The separate Supabase-ready shared version is in the `online` folder. See `online/README.md` for database setup and role policies.

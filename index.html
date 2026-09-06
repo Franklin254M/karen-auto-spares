@@ -18,11 +18,12 @@
       <h1>Know what sold.<br><em>Know what’s next.</em></h1>
       <p class="login-copy">A single workspace for auto parts stock, daily sales, profits, and barcode-led receipts.</p>
       <form id="login-form" class="login-form">
-        <label>Email address<input id="login-email" type="email" value="admin@ledgerly.test" required /></label>
-        <label>Password<input id="login-password" type="password" value="admin123" required /></label>
-        <button class="button button-primary button-wide" type="submit">Sign in <span>→</span></button>
+        <label>Your name<input id="login-name" type="text" placeholder="e.g. Amina Mutua" required /></label>
+        <label>Email address<input id="login-email" type="email" placeholder="you@example.com" required /></label>
+        <label>Work role<select id="login-role"><option value="admin">Administrator</option><option value="sales_agent">Sales agent</option></select></label>
+        <button class="button button-primary button-wide" type="submit">Enter offline workspace <span>→</span></button>
       </form>
-      <div class="demo-hint"><span class="status-dot"></span><strong>Demo access</strong><span>Admin: admin@ledgerly.test / admin123</span><span>Sales agent: agent@ledgerly.test / agent123</span></div>
+      <div class="demo-hint"><span class="status-dot"></span><strong>Offline workspace</strong><span>This local version stores records only in this browser.</span><span>Use the online version for secure shared accounts.</span></div>
     </div>
     <div class="login-art">
       <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>

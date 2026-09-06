@@ -95,8 +95,9 @@ function formatToday() {
   return new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' }).format(new Date());
 }
 
-function userFromEmail(email) {
-  return email.includes('agent') ? { name: 'Jon Bell', initials: 'JB', role: 'Sales agent', isAdmin: false } : { name: 'Amina M.', initials: 'AM', role: 'Administrator', isAdmin: true };
+function userFromDetails(name, email, role) {
+  const initials = name.split(/\s+/).map((part) => part[0]).join('').slice(0, 2).toUpperCase();
+  return { name, email, initials, role: role === 'admin' ? 'Administrator' : 'Sales agent', isAdmin: role === 'admin' };
 }
 
 function productImage(product) {
@@ -119,11 +120,10 @@ function lowStockRows() {
 
 function signIn(event) {
   event.preventDefault();
+  const name = $('#login-name').value.trim();
   const email = $('#login-email').value.trim().toLowerCase();
-  const password = $('#login-password').value;
-  const valid = (email === 'admin@ledgerly.test' && password === 'admin123') || (email === 'agent@ledgerly.test' && password === 'agent123');
-  if (!valid) return showToast('Use one of the demo accounts shown below the form.');
-  state.user = userFromEmail(email);
+  const role = $('#login-role').value;
+  state.user = userFromDetails(name, email, role);
   persist();
   bootApp();
 }
