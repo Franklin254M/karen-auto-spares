@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Karen Auto Spares | Sales & Stock Control</title>
+  <meta name="theme-color" content="#153f3b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="karen-icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -56,7 +61,7 @@
     </aside>
 
     <main class="main-content">
-      <header class="topbar"><div><p class="date-line" id="today-line"></p><h2 id="page-title">Good morning, Amina</h2></div><div class="top-actions"><button class="icon-button" title="Notifications">♢<span class="notification-dot"></span></button><button class="button button-primary" id="new-sale-button"><span>＋</span> Record sale</button></div></header>
+      <header class="topbar"><div><p class="date-line" id="today-line"></p><h2 id="page-title">Good morning</h2></div><div class="top-actions"><button class="button install-button hidden" id="install-button">Install app</button><button class="icon-button" title="Notifications">♢<span class="notification-dot"></span></button><button class="button button-primary" id="new-sale-button"><span>＋</span> Record sale</button></div></header>
       <section id="view-container"></section>
     </main>
   </div>
@@ -64,6 +69,8 @@
   <div id="toast" class="toast"></div>
   <div id="modal-root"></div>
   <script src="app.js"></script>
-  <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
+  <script>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+  </script>
 </body>
 </html>

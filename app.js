@@ -78,6 +78,7 @@ const viewContainer = $('#view-container');
 const toast = $('#toast');
 let toastTimer;
 let scannerStream = null;
+let installPrompt = null;
 
 function showToast(message) {
   toast.textContent = message;
@@ -85,6 +86,26 @@ function showToast(message) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
 }
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  installPrompt = event;
+  $('#install-button')?.classList.remove('hidden');
+});
+
+window.addEventListener('appinstalled', () => {
+  installPrompt = null;
+  $('#install-button')?.classList.add('hidden');
+  showToast('Karen Auto Spares was installed.');
+});
+
+$('#install-button')?.addEventListener('click', async () => {
+  if (!installPrompt) return showToast('Use your browser menu and choose Install app.');
+  installPrompt.prompt();
+  await installPrompt.userChoice;
+  installPrompt = null;
+  $('#install-button').classList.add('hidden');
+});
 
 function stopScanner() {
   scannerStream?.getTracks().forEach((track) => track.stop());
