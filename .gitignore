@@ -1,0 +1,12 @@
+# Local browser and tool state
+.vscode/
+*.log
+
+# Secrets and local environment files
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db

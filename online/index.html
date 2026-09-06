@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Karen Auto Spares Online</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="login-view" class="login-view">
+    <section class="login-card">
+      <div class="brand-mark">K</div>
+      <p class="eyebrow">Karen Auto Spares · Shared online workspace</p>
+      <h1>One stock room.<br><em>Every laptop.</em></h1>
+      <p>Secure Supabase accounts keep stock, sales, and profit records in one shared database.</p>
+      <form id="login-form">
+        <label>Email<input id="email" type="email" required autocomplete="email"></label>
+        <label>Password<input id="password" type="password" required autocomplete="current-password"></label>
+        <button class="primary" type="submit">Sign in <span>→</span></button>
+      </form>
+      <p id="login-message" class="message"></p>
+    </section>
+  </main>
+
+  <div id="app-view" class="app hidden">
+    <aside class="sidebar">
+      <div class="logo"><span class="brand-mark small">K</span><strong>Karen Auto Spares</strong></div>
+      <p class="workspace-label">Shared online workspace</p>
+      <nav id="navigation"></nav>
+      <button id="sign-out" class="sign-out">↪ Sign out</button>
+      <div class="profile"><span id="profile-avatar" class="avatar">AM</span><div><strong id="profile-name"></strong><small id="profile-role"></small></div></div>
+    </aside>
+    <section class="content">
+      <header class="topbar"><div><p id="date-label" class="eyebrow"></p><h2 id="page-title"></h2></div><span class="online-pill">● Online database</span></header>
+      <section id="page-content"></section>
+    </section>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
