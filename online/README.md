@@ -105,8 +105,8 @@ The password is intentionally not written in this repository. Use a strong passw
 
 ## Role behavior
 
-- `admin`: overview, shared inventory, purchasing, customers, reports, and all sales.
-- `sales_agent`: sales and receipts for that agent.
+- `admin`: overview, shared inventory management, purchasing, customers, reports, team access, and all sales.
+- `sales_agent`: daily overview with available stock and personal daily profit, read-only inventory, personal sales and receipts, and returns or warranty cases.
 
 Administrators can use **Purchasing control** to see low-stock parts and **Receive new stock** to add a new part with its quantity, incoming cost, optional supplier, and optional image URL. Existing products can be updated with **Edit** in Inventory. Administrators and sales agents can open **Overview** for sales profit comparisons and **Returns & warranty** to record cases.
 
