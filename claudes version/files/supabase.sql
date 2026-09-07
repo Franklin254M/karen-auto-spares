@@ -82,11 +82,11 @@ create policy "authenticated users read products" on public.products for select 
 drop policy if exists "admins manage products" on public.products;
 create policy "admins manage products" on public.products for all to authenticated using (public.is_admin()) with check (public.is_admin());
 drop policy if exists "admins read all sales" on public.sales;
-create policy "admins read all sales" on public.sales for select to authenticated using (public.is_admin() or agent_id = auth.uid());
+create policy "authenticated users read all sales" on public.sales for select to authenticated using (true);
 drop policy if exists "agents create sales" on public.sales;
 drop policy if exists "agents create returns" on public.returns;
 drop policy if exists "admins read all returns" on public.returns;
-create policy "admins read all returns" on public.returns for select to authenticated using (public.is_admin() or agent_id = auth.uid());
+create policy "authenticated users read all returns" on public.returns for select to authenticated using (true);
 drop policy if exists "admins manage returns" on public.returns;
 create policy "admins manage returns" on public.returns for update to authenticated using (public.is_admin()) with check (public.is_admin());
 
