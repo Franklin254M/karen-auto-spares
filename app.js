@@ -158,7 +158,7 @@ function bootApp() {
   $('#profile-avatar').textContent = state.user.initials;
   document.querySelector('.nav-item[data-view="team"]').classList.toggle('hidden', !state.user.isAdmin);
   document.querySelectorAll('.nav-item[data-view]').forEach((button) => {
-    const agentAllowed = button.dataset.view === 'sales';
+    const agentAllowed = ['sales', 'returns'].includes(button.dataset.view);
     button.classList.toggle('hidden', !state.user.isAdmin && !agentAllowed);
   });
   setView(state.user.isAdmin ? 'overview' : 'sales');
@@ -199,7 +199,7 @@ function pricesView() {
 
 function teamView() {
   const people = [{ initials: 'AM', name: 'Amina M.', role: 'Administrator', status: 'Full access' }, { initials: 'JB', name: 'Jon Bell', role: 'Sales agent', status: 'Sales & receipts' }, { initials: 'MK', name: 'Maya K.', role: 'Sales agent', status: 'Sales & receipts' }];
-  return `<div class="section-head"><div><p class="section-kicker">Workspace settings</p><h3>Team access</h3></div><button class="button button-primary" id="invite-button">＋ Invite member</button></div><p class="permission-note">Administrators can manage stock, prices, team access, and all reports. Sales agents can record sales and view their receipts.</p><div class="team-grid">${people.map((person) => `<div class="surface team-card"><div class="avatar">${person.initials}</div><div><h4>${person.name}</h4><p>${person.role} · ${person.status}</p></div></div>`).join('')}</div>`;
+  return `<div class="section-head"><div><p class="section-kicker">Workspace settings</p><h3>Team access</h3></div><button class="button button-primary" id="invite-button">＋ Invite member</button></div><p class="permission-note">Administrators can manage stock, prices, team access, and all reports. Sales agents can record sales, process returns, and view their receipts.</p><div class="team-grid">${people.map((person) => `<div class="surface team-card"><div class="avatar">${person.initials}</div><div><h4>${person.name}</h4><p>${person.role} · ${person.status}</p></div></div>`).join('')}</div>`;
 }
 
 function purchasingView() {
@@ -261,7 +261,7 @@ function openNotifications() {
 }
 
 function setView(view) {
-  const adminOnlyViews = ['overview', 'inventory', 'purchasing', 'customers', 'prices', 'reports', 'returns', 'activity', 'team'];
+  const adminOnlyViews = ['overview', 'inventory', 'purchasing', 'customers', 'prices', 'reports', 'activity', 'team'];
   if (!state.user.isAdmin && adminOnlyViews.includes(view)) {
     showToast('Sales agents can only record today\'s sales.');
     view = 'sales';
