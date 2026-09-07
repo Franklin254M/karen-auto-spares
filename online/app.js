@@ -1,5 +1,5 @@
 const SUPABASE_URL = 'https://dkgrrkkabfpfpjrqmjpq.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrZ3Jya2thYmZwZnBqcnFtanBxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2NjcyMTcsImV4cCI6MjEwNDI0MzIxN30.TU41RqxEFDUviyVrTZF-b34CHfylEMuOmVU3LyPMbbY';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2bnljbGlobmpscGx3aW1ucHRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3NDEzNzgsImV4cCI6MjEwNDMxNzM3OH0.OjlA6_jznzcxvb0k51f0wgwgbPA2qUuaICNrY0MSqXY';
 const supabaseReady = SUPABASE_URL.startsWith('https://') && !SUPABASE_ANON_KEY.startsWith('YOUR_');
 const client = supabaseReady ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 let currentUser = null;
