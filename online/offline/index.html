@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karen Auto Spares | Sales & Stock Control</title>
+  <meta name="theme-color" content="#153f3b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="karen-icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+</head>
+<body>
+  <div id="login-screen" class="login-screen">
+    <div class="login-panel">
+      <div class="brand-mark">K</div>
+      <p class="eyebrow">Karen Auto Spares · Sales operations</p>
+      <h1>Know what sold.<br><em>Know what’s next.</em></h1>
+      <p class="login-copy">A single workspace for auto parts stock, daily sales, profits, and barcode-led receipts.</p>
+      <form id="login-form" class="login-form">
+        <label>Your name<input id="login-name" type="text" placeholder="e.g. Amina Mutua" required /></label>
+        <label>Email address<input id="login-email" type="email" placeholder="you@example.com" required /></label>
+        <label>Work role<select id="login-role"><option value="admin">Administrator</option><option value="sales_agent">Sales agent</option></select></label>
+        <button class="button button-primary button-wide" type="submit">Enter offline workspace <span>→</span></button>
+      </form>
+      <div class="demo-hint"><span class="status-dot"></span><strong>Offline workspace</strong><span>This local version stores records only in this browser.</span><span>Use the online version for secure shared accounts.</span></div>
+    </div>
+    <div class="login-art">
+      <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+      <div class="art-card card-back"><span>Today’s profit</span><strong>+$3,842.60</strong></div>
+      <div class="art-card card-front"><span>Weekly movement</span><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><strong>+18.4%</strong><small>compared to last week</small></div>
+      <p class="art-caption">Every decision leaves<br> a clearer trail.</p>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="logo"><div class="brand-mark small">K</div><span>Karen Auto Spares</span></div>
+      <div class="workspace-label">Workspace <span class="live-pill">Live</span></div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">⌂</span>Overview</button>
+        <button class="nav-item" data-view="sales"><span class="nav-icon">↗</span>Sales & receipts</button>
+        <button class="nav-item" data-view="inventory"><span class="nav-icon">▦</span>Inventory</button>
+        <button class="nav-item" data-view="purchasing"><span class="nav-icon">＋</span>Purchasing</button>
+        <button class="nav-item" data-view="customers"><span class="nav-icon">◎</span>Customers</button>
+        <button class="nav-item" data-view="prices"><span class="nav-icon">◇</span>Price watch</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="nav-item" data-view="reports"><span class="nav-icon">▤</span>Reports</button>
+        <button class="nav-item" data-view="returns"><span class="nav-icon">↩</span>Returns & warranty</button>
+        <button class="nav-item" data-view="activity"><span class="nav-icon">◷</span>Activity log</button>
+        <button class="nav-item" data-view="team"><span class="nav-icon">◎</span>Team access</button>
+        <button class="nav-item" id="logout-button"><span class="nav-icon">↪</span>Sign out</button>
+        <div class="profile-mini"><div class="avatar" id="profile-avatar">AM</div><div><strong id="profile-name">Amina M.</strong><span id="profile-role">Administrator</span></div><span class="more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar"><div><p class="date-line" id="today-line"></p><h2 id="page-title">Good morning</h2></div><div class="top-actions"><button class="button install-button hidden" id="install-button">Install app</button><button class="icon-button" title="Notifications">♢<span class="notification-dot"></span></button><button class="button button-primary" id="new-sale-button"><span>＋</span> Record sale</button></div></header>
+      <section id="view-container"></section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <div id="modal-root"></div>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+  </script>
+</body>
+</html>

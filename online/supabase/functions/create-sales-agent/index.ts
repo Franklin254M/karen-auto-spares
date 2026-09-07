@@ -1,13 +1,16 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
+const allowedOrigin = Deno.env.get('APP_ORIGIN') || 'http://localhost:4173';
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': allowedOrigin,
+  'Vary': 'Origin',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type'
 };
 
 Deno.serve(async (request) => {
   if (request.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   try {
+    if (request.method !== 'POST') throw new Error('Method not allowed');
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const authHeader = request.headers.get('Authorization');
@@ -22,8 +25,11 @@ Deno.serve(async (request) => {
     if (profile?.role !== 'admin') throw new Error('Administrator access required');
 
     const { email, full_name } = await request.json();
-    if (!email || !full_name) throw new Error('Name and email are required');
-    const { error } = await adminClient.auth.admin.inviteUserByEmail(email, { data: { full_name, role: 'sales_agent' } });
+    const normalizedEmail = String(email || '').trim().toLowerCase();
+    const normalizedName = String(full_name || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) throw new Error('A valid email is required');
+    if (normalizedName.length < 2 || normalizedName.length > 100) throw new Error('Name must be between 2 and 100 characters');
+    const { error } = await adminClient.auth.admin.inviteUserByEmail(normalizedEmail, { data: { full_name: normalizedName, role: 'sales_agent' } });
     if (error) throw error;
     return new Response(JSON.stringify({ ok: true }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   } catch (error) {
