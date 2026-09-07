@@ -18,6 +18,12 @@ function isAdmin() { return currentProfile?.role === 'admin'; }
 function isToday(value) { const date = new Date(value); const today = new Date(); return date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate(); }
 function todaySales() { return sales.filter((sale) => isToday(sale.created_at)); }
 function productImage(product) { return product.image_url ? `<img class="thumb" src="${escapeHtml(product.image_url)}" alt="${escapeHtml(product.name)}">` : '<span class="thumb"></span>'; }
+function supabaseErrorMessage(error) {
+  const message = error?.message || '';
+  if (/failed to fetch|network|fetch/i.test(message)) return 'Cannot connect to Supabase. Check the URL and anon key in online/app.js, then reload.';
+  if (/invalid api key|invalid jwt|unauthorized/i.test(message)) return 'Supabase rejected the API key. Replace SUPABASE_ANON_KEY in online/app.js with the current anon key from Supabase Settings > API.';
+  return message || 'Supabase request failed. Check your project settings and connection.';
+}
 
 function readOfflineCache() { try { return JSON.parse(localStorage.getItem(offlineCacheKey)) || null; } catch { return null; } }
 function pendingSyncStorageKey() { return `karen-spares-pending-sync:${currentUser?.id || 'anonymous'}`; }
@@ -81,7 +87,7 @@ async function signIn(event) {
     currentUser = data.user;
     await startApp();
   } catch (error) {
-    loginMessage(error instanceof Error ? error.message : 'Login failed. Check your connection and account details.');
+    loginMessage(supabaseErrorMessage(error));
   }
 }
 
@@ -145,7 +151,7 @@ async function startApp() {
     const cached = readOfflineCache();
     if (!cached?.profile || cached.profile.id !== currentUser.id || !isOfflineError(error)) {
       await client.auth.signOut();
-      return loginMessage(error?.message?.includes('profile') ? error.message : 'Your Auth user exists, but its app profile is missing. Run the profile SQL in Supabase, then try again.');
+      return loginMessage(error?.message?.includes('profile') ? error.message : supabaseErrorMessage(error));
     }
     currentProfile = cached.profile;
     toast('Offline mode: using your saved account.');
